@@ -5,6 +5,7 @@ Currently works on CUCM version 9.x and above.
 
 Sample usage:
 
+```
 from pprint import pprint
 from ris import *
 
@@ -27,3 +28,4 @@ print "Total registered phones: %s " % len(devs.get_registered(devices=phones))
 print "Total registered SIP Trunks: %s " % len(devs.get_registered(devices=sip))
 print "Total registered gateway devices: %s " % len(devs.get_registered(devices=gws))
 pprint(dict(devs.registered_devices))
+```
