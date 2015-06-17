@@ -11,7 +11,6 @@ def selectcmdevice(cucm,
              Class="Any",
              Status="Any",
              NodeName="Any"):
-#http://blog.darrenparkinson.uk/2013/01/using-python-to-call-cisco.html
     tns = 'http://schemas.cisco.com/ast/soap/'
     imp = Import('http://schemas.xmlsoap.org/soap/encoding/', 'http://schemas.xmlsoap.org/soap/encoding/')
     imp.filter.add(tns)

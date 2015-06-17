@@ -3,23 +3,26 @@
 Use CUCM's RIS API to get list of devices.
 Currently works on CUCM version 9.x and above.
 
+suds code borrowed from http://blog.darrenparkinson.uk/2013/01/using-python-to-call-cisco.html
+
 Sample usage:
 
 ```
-from pprint import pprint
 from collections import defaultdict
-from ris import *
+from pprint import pprint
+from collab.ris import *
+from collab.devices import Devices
 
-
-cmnodes = ["UCM-01.example.ltd", "UCM-02.example.ltd"]
+cmnodes = ["UCM-01.foo.ltd", "UCM-02.foo.ltd"]
 
 devices = defaultdict(list)
-for cm in cmnodes:
-    data = selectCMDevice(NodeName=cm)
-    res_soap = risquery(server="10.0.20.248", username='admin', password='admin', data=data)
-    devices = parse_devices(res_soap, devices)
-    parse_status(res_soap)
 
+for cm in cmnodes:
+    total, nodes = selectcmdevice(cucm="10.0.254.254", username='admin', 
+                   password='foobar', NodeName=cm)
+    for node in nodes:
+        devices = parse_devices(node, devices)
+        
 devs = Devices(devices)
 sip = devs.get_device_w_attribute(devices, class_="SIP Trunk")
 gws = devs.get_device_w_attribute(devices, class_="Gateway")
